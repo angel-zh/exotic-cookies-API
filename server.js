@@ -67,6 +67,16 @@ app.get('/snacks', (req, res) => {
 })
 
 
+// Show Route
+app.get('/snacks/:id', (req, res) => {
+    const id = req.params.id
+    Snack.findById(id)
+        .then(snack =>  {
+            res.json({ snack: snack })
+        })
+        .catch(err => console.log(err))
+})
+
 ////// Server Listener ///////
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Now listening to the sweet sounds of port: ${PORT}`))
