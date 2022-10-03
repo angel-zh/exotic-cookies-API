@@ -100,13 +100,13 @@ app.put('/snacks/:id', (req, res) => {
 
 
 // Delete Route
-app.delete('snacks/:id', (req, res) => {
+app.delete('/snacks/:id', (req, res) => {
     const id = req.params.id
     Snack.findByIdAndRemove(id)
-        .then(() =>  {
+        .then(snack =>  {
             res.sendStatus(204)
     })
-        .catch(err => res.json(err))
+        .catch(err => console.log(err))
 })
 
 
