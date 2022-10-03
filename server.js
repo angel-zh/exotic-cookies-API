@@ -95,7 +95,20 @@ app.put('/snacks/:id', (req, res) => {
         .then(snack => {
             res.sendStatus(204)
         })
+        .catch(err => res.json(err))
 })
+
+
+// Delete Route
+app.delete('snacks/:id', (req, res) => {
+    const id = req.params.id
+    Snack.findByIdAndRemove(id)
+        .then(() =>  {
+            res.sendStatus(204)
+    })
+        .catch(err => res.json(err))
+})
+
 
 ////// Server Listener ///////
 const PORT = process.env.PORT
