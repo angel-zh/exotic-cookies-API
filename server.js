@@ -35,6 +35,25 @@ app.get('/', (req, res) => {
     res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Sweet Snacks API homepage!</h1><p>Here you will find some information about different sweet snacks. Enjoy!</p></body>`)
 })
 
+app.get('/snacks/seed', (req, res) => {
+    const sweetSnacks = [
+        { name: 'Chocolate Mousse', calories: 355, isHealthy: false, isEatenCold: true },
+        { name: 'Applesauce', calories: 105, isHealthy: true, isEatenCold: false },
+        { name: 'Strawberry Shortcake', calories: 625, isHealthy: false, isEatenCold: true },
+        { name: 'Peanut Butter Granola Bar', calories: 120, isHealthy: true, isEatenCold: false },
+        { name: 'Vanilla Ice Cream', calories: 270, isHealthy: false, isEatenCold: true },
+        { name: 'Brownie', calories: 425, isHealthy: false, isEatenCold: false },
+    ]
+
+
+    Snack.deleteMany({})
+        .then(() => {
+            Snack.create(sweetSnacks)
+                .then(data => {
+                    res.json(data)
+                })
+        })
+})
 
 ////// Server Listener ///////
 const PORT = process.env.PORT
