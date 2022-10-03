@@ -31,10 +31,13 @@ app.use(express.json())
 
 
 /////// Routes /////////
+// Homepage
 app.get('/', (req, res) => {
     res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Sweet Snacks API homepage!</h1><p>Here you will find some information about different sweet snacks. Enjoy!</p></body>`)
 })
 
+
+// Seed Route
 app.get('/snacks/seed', (req, res) => {
     const sweetSnacks = [
         { name: 'Chocolate Mousse', calories: 355, isHealthy: false, isEatenCold: true },
@@ -44,8 +47,6 @@ app.get('/snacks/seed', (req, res) => {
         { name: 'Vanilla Ice Cream', calories: 270, isHealthy: false, isEatenCold: true },
         { name: 'Brownie', calories: 425, isHealthy: false, isEatenCold: false },
     ]
-
-
     Snack.deleteMany({})
         .then(() => {
             Snack.create(sweetSnacks)
@@ -54,6 +55,17 @@ app.get('/snacks/seed', (req, res) => {
                 })
         })
 })
+
+
+// Index Route
+app.get('/snacks', (req, res) => {
+    Snack.find({})
+        .then(snacks=> {
+            res.json({ snacks: snacks})
+    })
+    .catch(err => console.log(err))
+})
+
 
 ////// Server Listener ///////
 const PORT = process.env.PORT
