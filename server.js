@@ -28,3 +28,14 @@ app.use(morgan('tiny'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(express.json())
+
+
+/////// Routes /////////
+app.get('/', (req, res) => {
+    res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Sweet Snacks API homepage!</h1><p>Here you will find some information about different sweet snacks. Enjoy!</p></body>`)
+})
+
+
+////// Server Listener ///////
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log(`Now listening to the sweet sounds of port: ${PORT}`))
