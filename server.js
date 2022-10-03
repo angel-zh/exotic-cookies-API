@@ -77,6 +77,19 @@ app.get('/snacks/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 
+
+// Create route
+app.post('/snacks', (req, res) => {
+    Snack.create(req.body)
+        .then(snack => {
+            res.status(201).json({ snack: snack.toObject() })
+        })
+        .catch(err => console.log(err))
+})
+
+
+
+
 ////// Server Listener ///////
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Now listening to the sweet sounds of port: ${PORT}`))
