@@ -88,7 +88,14 @@ app.post('/snacks', (req, res) => {
 })
 
 
-
+// Update Route
+app.put('/snacks/:id', (req, res) => {
+    const id = req.params.id
+    Snack.findByIdAndUpdate(id, req.body, {new: true})
+        .then(snack => {
+            res.sendStatus(204)
+        })
+})
 
 ////// Server Listener ///////
 const PORT = process.env.PORT
