@@ -1,7 +1,7 @@
 
 // Import Dependencies
 const express = require('express')
-const Snack = require('../models/snack')
+const Cookie = require('../models/cookie')
 
 
 // Create Router
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
 // Show Route
 router.get('/:id', (req, res) => {
     const id = req.params.id
-    Snack.findById(id)
+    Cookie.findById(id)
         .then(cookie => {
             res.json({ cookie: cookie })
         })
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 
 // Create route
 router.post('/', (req, res) => {
-    // add ownership via a foreign key reference to our fruits
+    // add ownership via a foreign key reference to our cookies
     // append our request body with the 'owner' field set to the logged in user's Id
     req.body.owner = req.session.userId
     Cookie.create(req.body)
