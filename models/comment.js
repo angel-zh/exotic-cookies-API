@@ -2,6 +2,7 @@
 
 // Import Dependencies
 const mongoose = require('./connection')
+// subdocuments are not models, they are associated with a model
 const { Schema } = mongoose
 
 // comment schema
