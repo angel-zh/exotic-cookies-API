@@ -4,6 +4,7 @@
 const mongoose = require('mongoose')
 const User = require('./user') 
 const commentSchema = require('./comment')
+const ratingSchema = require('./rating')
 
 // Schema and model pulled from mongoose
 // use syntax called 'destructuring'
@@ -22,7 +23,8 @@ const cookieSchema = new Schema({
         // references the User model
         ref: 'User'
     },
-    comments: [commentSchema]
+    comments: [commentSchema],
+    ratings: [ratingSchema]
 }, { timestamps: true })
 
 // cookie model
