@@ -11,6 +11,7 @@ const router = express.Router()
 // Index Route
 router.get('/', (req, res) => {
     Cookie.find({})
+        .populate('comments.author', 'username')
         .then(cookies=> {
             res.json({ cookies: cookies})
     })
@@ -31,6 +32,9 @@ router.get('/:id', (req, res) => {
 
 // Create route
 router.post('/', (req, res) => {
+    // add ownership via a foreign key reference to our fruits
+    // append our request body with the 'owner' field set to the logged in user's Id
+    req.body.owner = req.session.userId
     Cookie.create(req.body)
         .then(cookie => {
             res.status(201).json({ cookie: cookie.toObject() })
