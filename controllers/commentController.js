@@ -1,7 +1,7 @@
 
 // Import Dependencies
-const express = require("express")
-const Cookie = require("../models/cookie")
+const express = require('express')
+const Cookie = require('../models/cookie')
 
 
 // Create Router
@@ -11,7 +11,7 @@ const router = express.Router()
 // Routes
 // POST
 // only loggedIn users can post comments
-router.post("/:cookieId", (req, res) => {
+router.post('/:cookieId', (req, res) => {
     const cookieId = req.params.cookieId
     if (req.session.loggedIn) {
         // we want to adjust req.body so that the author is automatically assigned
