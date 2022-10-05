@@ -50,7 +50,7 @@ router.delete('/delete/:cookieId/:commId', (req, res) => {
             if (req.session.loggedIn) {
                 // only let the author of the comment delete it
                 if (theComment.author == req.session.userId) {
-                    theComment.remove()
+                    theComment.deleteOne()
                     cookie.save()
                     res.sendStatus(204)
                 } else {
