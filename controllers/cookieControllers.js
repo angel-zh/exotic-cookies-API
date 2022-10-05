@@ -12,10 +12,10 @@ const router = express.Router()
 router.get('/', (req, res) => {
     Cookie.find({})
         .populate('comments.author', 'username')
-        .then(cookies=> {
-            res.json({ cookies: cookies})
-    })
-    .catch(err => console.log(err))
+        .then(cookies => {
+            res.json({ cookies: cookies })
+        })
+        .catch(err => console.log(err))
 })
 
 
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id
     Snack.findById(id)
-        .then(cookie =>  {
+        .then(cookie => {
             res.json({ cookie: cookie })
         })
         .catch(err => console.log(err))
@@ -46,9 +46,16 @@ router.post('/', (req, res) => {
 // Update Route
 router.put('/:id', (req, res) => {
     const id = req.params.id
-    Cookie.findByIdAndUpdate(id, req.body, {new: true})
-        .then(snack => {
-            res.sendStatus(204)
+    Cookie.findById(id)
+        .then(cookie => {
+            // if the fruit's owner is the current logged in user
+            if (fruit.owner == req.session.userId) {
+                res.sendStatus(204)
+                return cookie.updateOne(req.body)
+            // if owner is not the user
+            } else {
+                res.sendStatus(401)
+            }
         })
         .catch(err => res.json(err))
 })
@@ -58,9 +65,9 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const id = req.params.id
     Cookie.findByIdAndRemove(id)
-        .then(cookie =>  {
+        .then(cookie => {
             res.sendStatus(204)
-    })
+        })
         .catch(err => console.log(err))
 })
 
