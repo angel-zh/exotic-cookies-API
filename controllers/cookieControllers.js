@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         .then(cookies => {
             res.json({ cookies: cookies })
         })
-        .catch(err => console.log(err))
+        .catch(err => res.json(err))
 })
 
 
@@ -26,7 +26,7 @@ router.get('/:id', (req, res) => {
         .then(cookie => {
             res.json({ cookie: cookie })
         })
-        .catch(err => console.log(err))
+        .catch(err => res.json(err))
 })
 
 
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
         .then(cookie => {
             res.status(201).json({ cookie: cookie.toObject() })
         })
-        .catch(err => console.log(err))
+        .catch(err => res.json(err))
 })
 
 
@@ -48,11 +48,11 @@ router.put('/:id', (req, res) => {
     const id = req.params.id
     Cookie.findById(id)
         .then(cookie => {
-            // if the fruit's owner is the current logged in user
-            if (fruit.owner == req.session.userId) {
+            // if the cookie's owner is the current logged in user
+            if (cookie.owner == req.session.userId) {
                 res.sendStatus(204)
                 return cookie.updateOne(req.body)
-            // if owner is not the user
+            // if owner is not the user, unauthorized status
             } else {
                 res.sendStatus(401)
             }
@@ -64,11 +64,16 @@ router.put('/:id', (req, res) => {
 // Delete Route
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-    Cookie.findByIdAndRemove(id)
+    Cookie.findById(id)
         .then(cookie => {
-            res.sendStatus(204)
+            if (cookie.owner == req.session.userId) {
+                res.sendStatus(204)
+                return cookie.deleteOne()
+            } else {
+                res.sendStatus(401)
+            }
         })
-        .catch(err => console.log(err))
+        .catch(err => res.json(err))
 })
 
 
