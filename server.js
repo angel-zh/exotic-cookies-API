@@ -3,7 +3,7 @@ require("dotenv").config()
 const express = require("express") 
 
 const path = require("path") 
-const SnackRouter = require('./controllers/fruitControllers')
+const SnackRouter = require('./controllers/snackControllers')
 const UserRouter = require('./controllers/userControllers')
 const middleware = require('./utils/middleware')
 

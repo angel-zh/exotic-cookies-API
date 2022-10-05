@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 
 // Show Route
-arouterpp.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id
     Snack.findById(id)
         .then(snack =>  {

@@ -2,7 +2,7 @@
 // User resource (schema and model)
 
 // Import Dependencies
-const moongoose = require('./conneciton')
+const mongoose = require('./connection')
 const { Schema, model } = mongoose
 
 
