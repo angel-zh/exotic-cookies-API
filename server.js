@@ -3,7 +3,7 @@ require("dotenv").config()
 const express = require("express") 
 
 const path = require("path") 
-const SnackRouter = require('./controllers/snackControllers')
+const CookieRouter = require('./controllers/CookieControllers')
 const UserRouter = require('./controllers/userControllers')
 const middleware = require('./utils/middleware')
 
@@ -18,10 +18,10 @@ middleware(app)
 /////// Routes /////////
 // Homepage
 app.get('/', (req, res) => {
-    res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Sweet Snacks API homepage!</h1><p>Here you will find some information about different sweet snacks. Enjoy!</p></body>`)
+    res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Exotic Cookies API homepage!</h1><p>Here you will find some information about unique cookie flavors. Enjoy!</p></body>`)
 })
 // Register our Routs
-app.use('/snacks', SnackRouter)
+app.use('/cookiess', CookieRouter)
 app.use('/users', UserRouter)
 
 ////// Server Listener ///////

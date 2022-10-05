@@ -10,9 +10,9 @@ const router = express.Router()
 // Routes
 // Index Route
 router.get('/', (req, res) => {
-    Snack.find({})
-        .then(snacks=> {
-            res.json({ snacks: snacks})
+    Cookie.find({})
+        .then(cookies=> {
+            res.json({ cookies: cookies})
     })
     .catch(err => console.log(err))
 })
@@ -22,8 +22,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id
     Snack.findById(id)
-        .then(snack =>  {
-            res.json({ snack: snack })
+        .then(cookie =>  {
+            res.json({ cookie: cookie })
         })
         .catch(err => console.log(err))
 })
@@ -31,9 +31,9 @@ router.get('/:id', (req, res) => {
 
 // Create route
 router.post('/', (req, res) => {
-    Snack.create(req.body)
-        .then(snack => {
-            res.status(201).json({ snack: snack.toObject() })
+    Cookie.create(req.body)
+        .then(cookie => {
+            res.status(201).json({ cookie: cookie.toObject() })
         })
         .catch(err => console.log(err))
 })
@@ -42,7 +42,7 @@ router.post('/', (req, res) => {
 // Update Route
 router.put('/:id', (req, res) => {
     const id = req.params.id
-    Snack.findByIdAndUpdate(id, req.body, {new: true})
+    Cookie.findByIdAndUpdate(id, req.body, {new: true})
         .then(snack => {
             res.sendStatus(204)
         })
@@ -53,8 +53,8 @@ router.put('/:id', (req, res) => {
 // Delete Route
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-    Snack.findByIdAndRemove(id)
-        .then(snack =>  {
+    Cookie.findByIdAndRemove(id)
+        .then(cookie =>  {
             res.sendStatus(204)
     })
         .catch(err => console.log(err))

@@ -2,13 +2,14 @@ const mongoose = require('mongoose')
 
 const { Schema, model } = mongoose
 
-const snackSchema = new Schema({
+const cookieSchema = new Schema({
     name: String, 
+    rating: String,
     calories: Number,
-    isHealthy: Boolean,
+    isSweet: Boolean,
     isEatenCold: Boolean
 })
 
-const Snack = model('Snack', snackSchema)
+const Cookie = model('Cookie', cookieSchema)
 
-module.exports = Snack
+module.exports = Cookie

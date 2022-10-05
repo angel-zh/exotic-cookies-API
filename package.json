@@ -1,7 +1,7 @@
 {
-  "name": "sweet-snacks-api",
+  "name": "exotic-cookies-api",
   "version": "1.0.0",
-  "description": "A single resource API of deliciously sweet snacks!",
+  "description": "A single resource API of deliciously exotic cookies!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angel-zh/sweet-snacks-API.git"
+    "url": "git+https://github.com/angel-zh/exotic-cookies-API.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/angel-zh/sweet-snacks-API/issues"
+    "url": "https://github.com/angel-zh/exotic-cookies-API/issues"
   },
-  "homepage": "https://github.com/angel-zh/sweet-snacks-API#readme",
+  "homepage": "https://github.com/angel-zh/exotic-cookies-API#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^4.6.0",

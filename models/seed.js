@@ -1,25 +1,27 @@
 
 // Import Dependencies
 const mongoose = require('./connection')
-const Snack = require('./snack')
+const Cookie = require('./cookie')
 
 // Seed Script Code
 const db = mongoose.connection
 db.on('open', () => {
-    const sweetSnacks = [
-        { name: 'Chocolate Mousse', calories: 355, isHealthy: false, isEatenCold: true },
-        { name: 'Applesauce', calories: 105, isHealthy: true, isEatenCold: false },
-        { name: 'Strawberry Shortcake', calories: 625, isHealthy: false, isEatenCold: true },
-        { name: 'Peanut Butter Granola Bar', calories: 120, isHealthy: true, isEatenCold: false },
-        { name: 'Vanilla Ice Cream', calories: 270, isHealthy: false, isEatenCold: true },
-        { name: 'Brownie', calories: 425, isHealthy: false, isEatenCold: false },
+    const startCookies = [
+        { name: 'Chocolate Mousse Cookie', rating: '4/5', calories: 320, isSweet: true, isEatenCold: true },
+        { name: 'Applesauce Cookie', rating: '3/5', calories: 115, isSweet: true, isEatenCold: false },
+        { name: 'Strawberry Shortcake Cookie', rating: '4/5', calories: 285, isSweet: true, isEatenCold: true },
+        { name: 'Almond Ice Cream Cookie', rating: '3.5/5', calories: 280, isSweet: true, isEatenCold: true },
+        { name: 'Beef Jerky Cookie', rating: '5/5', calories: 300, isSweet: false, isEatenCold: false },
+        { name: 'Cheesy Lobster Cookie', rating: '4.5/5', calories: 320, isSweet: false, isEatenCold: false },
+        { name: 'Meatball Marinara Cookie', rating: '4/5', calories: 385, isSweet: false, isEatenCold: false },
+        { name: 'The Too Healthy Cookie', rating: '4/5',calories: 120, isSweet: true, isEatenCold: false }
     ]
-    Snack.deleteMany({})
-        .then(deletedSnacks => {
-            console.log('this is what .deleteMany returns', deletedSnacks)
-            Snack.create(sweetSnacks)
+    Cookie.deleteMany({})
+        .then(deletedCookies => {
+            console.log('this is what .deleteMany returns', deletedCookies)
+            Cookie.create(startCookies)
                 .then(data => {
-                    console.log('here are the newly created snacks', data)
+                    console.log('here are the newly created cookies', data)
                     db.close()
                 })
                 .catch(err => {
