@@ -12,7 +12,7 @@ const router = express.Router()
 // POST
 // only loggedIn users can post comments
 router.post("/:cookieId", (req, res) => {
-    const cookieId = req.params.fruitId
+    const cookieId = req.params.cookieId
     if (req.session.loggedIn) {
         // we want to adjust req.body so that the author is automatically assigned
         req.body.author = req.session.userId
@@ -51,7 +51,7 @@ router.delete('/delete/:cookieId/:commId', (req, res) => {
                 // only let the author of the comment delete it
                 if (theComment.author == req.session.userId) {
                     theComment.remove()
-                    fruit.save()
+                    cookie.save()
                     res.sendStatus(204)
                 } else {
                     res.sendStatus(401)
