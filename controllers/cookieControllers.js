@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     Cookie.find({})
         .populate('comments.author', 'username')
         .then(cookies => {
-            res.json({ cookies: cookies })
+            res.render('cookies/index', { cookies })
         })
         .catch(err => res.json(err))
 })
