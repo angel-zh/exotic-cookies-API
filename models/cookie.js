@@ -13,7 +13,6 @@ const { Schema, model } = mongoose
 // cookie Schema
 const cookieSchema = new Schema({
     name: String, 
-    rating: String,
     calories: Number,
     isSweet: Boolean,
     isEatenCold: Boolean,
