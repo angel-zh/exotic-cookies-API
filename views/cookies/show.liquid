@@ -1,0 +1,35 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <div class="container-md">
+        <article>
+            <h2>{{cookie.name}}</h2>
+            <h4>
+                {% if cookie.isSweet %}
+                    Sweet
+                {% else %}
+                    Salty
+                {% endif %} 
+            </h4>
+            <h4>{{cookie.calories}} calories per cookie</h4>
+            <h5>This cookie is best eaten 
+                {% if cookie.isEatenCold %}
+                    cold!
+                {% else %}
+                    warm!
+                {% endif %} 
+            </h5>
+            {% if cookie.owner == userId %}
+                <div class="btn-group">
+                    <!-- first button will send us to edit page -->
+                    <a class="btn btn-primary" href="/cookies/edit/{{cookie.id}}">Edit</a>
+                    <!-- second button which will actually be a form, will send a DELETE request -->
+                    <!-- default action for a form is a POST, need to method override it and set it to DELETE-->
+                    <form action="/cookies/{{cookie.id}}?_method=DELETE">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            {% endif %}
+        </article>
+    </div>
+
+{% endblock %}
