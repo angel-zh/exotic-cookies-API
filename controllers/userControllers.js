@@ -10,7 +10,15 @@ const router = express.Router()
 
 
 // Routes
-// route for sign up
+
+// GET route for sign up
+// renders a page with the signup form
+router.get('/signup', (req, res) => {
+    res.render('users/signup')
+})
+
+// POST route for sign up
+// talks to the database, gets data from signup form, creates a new user
 router.post('/signup', async (req, res) => {
     // this route will receive a req.body
     console.log('this is our initial req.body', req.body)
