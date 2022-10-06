@@ -19,6 +19,18 @@ router.get('/', (req, res) => {
 })
 
 
+// GET request
+// another index route, owner-specific, to list all fruits owned by logged in user
+router.get('/mine', (req, res) => {
+    // find fruits by owner and display them
+    Fruit.find({ owner: req.session.userId })
+        .then(fruits => {
+            res.status(200).json({ fruits: fruits })
+        })
+        .catch(err => res.json(err))
+})
+
+
 // Show Route
 router.get('/:id', (req, res) => {
     const id = req.params.id
