@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 })
 // Register our Routes
 // first argument is base url endpoint, second is the file to use
-app.use('/cookiess', CookieRouter)
+app.use('/cookies', CookieRouter)
 app.use('/comments', CommentRouter)
 app.use('/users', UserRouter)
 app.use('/ratings', RatingRouter)
