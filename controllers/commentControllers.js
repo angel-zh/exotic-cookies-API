@@ -39,7 +39,7 @@ router.delete('/delete/:cookieId/:commId', (req, res) => {
     // isolate the ids and save to vars for easy ref
     const cookieId = req.params.cookieId 
     const commId = req.params.commId
-    Cookir.findById(cookieId)
+    Cookie.findById(cookieId)
         .then(cookie => {
             // get the comment
             // subdocs have a built in method that you can use to access specific subdocuments when you need to
