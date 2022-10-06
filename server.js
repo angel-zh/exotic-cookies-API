@@ -21,8 +21,9 @@ middleware(app)
 /////// Routes /////////
 // Homepage
 app.get('/', (req, res) => {
-    res.send(`<body style="background-color:pink;text-align:center"><h1>Welcome to the Exotic Cookies API homepage!</h1><p>Here you will find some information about unique cookie flavors. Enjoy!</p></body>`)
+    res.render('index.liquid')
 })
+
 // Register our Routes
 // first argument is base url endpoint, second is the file to use
 app.use('/cookies', CookieRouter)
