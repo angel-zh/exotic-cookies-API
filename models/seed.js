@@ -16,7 +16,7 @@ db.on('open', () => {
         { name: 'Meatball Marinara Cookie', calories: 385, isSweet: false, isEatenCold: false },
         { name: 'The Too Healthy Cookie', calories: 120, isSweet: true, isEatenCold: false }
     ]
-    Cookie.deleteMany({})
+    Cookie.deleteMany({ owner: null })
         .then(deletedCookies => {
             console.log('this is what .deleteMany returns', deletedCookies)
             Cookie.create(startCookies)
