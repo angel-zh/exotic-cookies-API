@@ -7,14 +7,14 @@ const Cookie = require('./cookie')
 const db = mongoose.connection
 db.on('open', () => {
     const startCookies = [
-        { name: 'Chocolate Mousse Cookie', rating: '4/5', calories: 320, isSweet: true, isEatenCold: true },
-        { name: 'Applesauce Cookie', rating: '3/5', calories: 115, isSweet: true, isEatenCold: false },
-        { name: 'Strawberry Shortcake Cookie', rating: '4/5', calories: 285, isSweet: true, isEatenCold: true },
-        { name: 'Almond Ice Cream Cookie', rating: '3.5/5', calories: 280, isSweet: true, isEatenCold: true },
-        { name: 'Beef Jerky Cookie', rating: '5/5', calories: 300, isSweet: false, isEatenCold: false },
-        { name: 'Cheesy Lobster Cookie', rating: '4.5/5', calories: 320, isSweet: false, isEatenCold: false },
-        { name: 'Meatball Marinara Cookie', rating: '4/5', calories: 385, isSweet: false, isEatenCold: false },
-        { name: 'The Too Healthy Cookie', rating: '4/5',calories: 120, isSweet: true, isEatenCold: false }
+        { name: 'Chocolate Mousse Cookie', calories: 320, isSweet: true, isEatenCold: true },
+        { name: 'Applesauce Cookie', calories: 115, isSweet: true, isEatenCold: false },
+        { name: 'Strawberry Shortcake Cookie', calories: 285, isSweet: true, isEatenCold: true },
+        { name: 'Almond Ice Cream Cookie', calories: 280, isSweet: true, isEatenCold: true },
+        { name: 'Beef Jerky Cookie', calories: 300, isSweet: false, isEatenCold: false },
+        { name: 'Cheesy Lobster Cookie', calories: 320, isSweet: false, isEatenCold: false },
+        { name: 'Meatball Marinara Cookie', calories: 385, isSweet: false, isEatenCold: false },
+        { name: 'The Too Healthy Cookie', calories: 120, isSweet: true, isEatenCold: false }
     ]
     Cookie.deleteMany({})
         .then(deletedCookies => {
