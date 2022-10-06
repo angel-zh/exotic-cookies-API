@@ -1,0 +1,27 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+
+<div>
+    <h2 class="'display-6">All Fruits</h2>
+    <div class="row">
+        {% for cookie in cookies %}
+        <div class="card">
+            <h5 class="card-header">{{cookie.name}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {% if cookie.isSweet %}
+                        Sweet
+                    {% else %}
+                        Salty
+                    {% endif %}
+                </h5>
+                <a class="btn btn-info" href="/cookies/{{cookie.id}}">
+                    View {{cookie.name}}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
