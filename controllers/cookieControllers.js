@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
             // here, we're going to render page but we can also send data that we got from the database to that liquid page for rendering, this data is an object that contains all cookies
             res.render('cookies/index', { cookies, username, loggedIn, userId })
         })
-        .catch(err => console.log(err))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 // GET for new cookie
@@ -33,7 +33,7 @@ router.get('/new', (req, res) => {
 })
 
 // GET for owner's cookies
-// another index route, owner-specific, to list all cookies owned by logged in user
+// index route, owner-specific, to list all cookies owned by logged in user
 router.get('/mine', (req, res) => {
     // find cookies by owner and display them
     Cookie.find({ owner: req.session.userId })
@@ -43,21 +43,21 @@ router.get('/mine', (req, res) => {
             const userId = req.session.userId
             res.render('cookies/index', { cookies, username, loggedIn, userId })
         })
-        .catch(err => res.json(err))
-})
+        .catch(err => res.redirect(`/error?error=${err}`))
+    })
 
 // GET one cookie
 // Show Route
 router.get('/:id', (req, res) => {
-    const id = req.params.id
-    Cookie.findById(id)
+    const cookieId = req.params.id
+    Cookie.findById(cookieId)
         .then(cookie => {
             const username = req.session.username
             const loggedIn = req.session.loggedIn
             const userId = req.session.userId
             res.render('cookies/show', { cookie, username, loggedIn, userId })
         })
-        .catch(err => res.json(err))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 // POST for new cookie
@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
         .then(cookie => {
             res.redirect('/cookies')
         })
-        .catch(err => res.json(err))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 
@@ -87,9 +87,7 @@ router.get('/edit/:id', (req, res) => {
         .then (cookie => {
             res.render('cookies/edit', { cookie, username, loggedIn, userId })
         })
-        .catch (err => {
-            res.json(err)
-        })
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 // PUT
@@ -111,7 +109,7 @@ router.put('/:id', (req, res) => {
         .then(() => {
             res.redirect(`/cookies/${cookieId}`)
         })
-        .catch(err => res.json(err))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 
@@ -125,9 +123,7 @@ router.delete('/:id', (req, res) => {
             // if the delete is successful, send the user back to the index page
             res.redirect('/cookies')
         })
-        .catch(error => {
-            res.json({ error })
-        })
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 
