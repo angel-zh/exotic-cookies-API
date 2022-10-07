@@ -30,6 +30,35 @@
                 </div>
             {% endif %}
         </article>
+        <hr>
+        {% if loggedIn %}
+        <div class="col-md-6">
+            <form action="/comments/{{cookie.id}}" method="POST">
+                <fieldset>
+                    <legend>Add comments about this cookie</legend>
+                    <label class="form-label">Comment: </label>
+                    <input type="text" class="form-control mb-2" placeholder="enter your comment..." name="note" required>
+                </fieldset>
+                <input class="btn btn-success" type="submit" value="Add Comment">
+            </form>
+        </div>
+        {% else %}
+        <div class="col-md-6">
+            Please create an account or log in if you'd like to leave a comment.
+        </div>div>
+        {% endif %}
+        <hr>
+        {% if cookie.comments.length > 0 %}
+        <div class="container-sm" justify-content-center>
+            <div class="col-md-8 col-lg-6">
+                {% for comment in cookie.comments %}
+                    {% render '../comment.liquid', comment: comment, userId: userId, cookie: cookie %}
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <small>no comments yet...</small>
+        {% endif %}
     </div>
 
 {% endblock %}
