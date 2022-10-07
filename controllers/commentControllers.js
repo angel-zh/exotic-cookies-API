@@ -28,9 +28,9 @@ router.post('/:cookieId', (req, res) => {
             return cookie.save()
         })
         .then(cookie => {
-            res.status(200).json({ cookie: cookie })
+            res.redirect(`/cookies/${cookie.id}`)
         })
-        .catch(error => console.log(error))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 // DELETE
@@ -52,15 +52,17 @@ router.delete('/delete/:cookieId/:commId', (req, res) => {
                 if (theComment.author == req.session.userId) {
                     theComment.deleteOne()
                     cookie.save()
-                    res.sendStatus(204)
+                    res.redirect(`/cookies/${cookie.id}`)
                 } else {
-                    res.sendStatus(401)
+                    const err = 'you%20are%20not%20authorized%20or%20this%20action'
+                    res.redirect(`/error?error=${err}`)
                 }
             } else {
-                res.sendStatus(401)
+                const err = 'you%20are%20not%20authorized%20or%20this%20action'
+                    res.redirect(`/error?error=${err}`)
             }
         })
-        .catch(error => console.log(error))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 
