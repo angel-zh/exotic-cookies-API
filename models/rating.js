@@ -9,7 +9,8 @@ const { Schema } = mongoose
 const ratingSchema = new Schema({
     rating: {
         type: Number,
-        required: true
+        required: true,
+        enum: [1, 2, 3, 4, 5]
     },
     author: {
         type: Schema.Types.ObjectId,
