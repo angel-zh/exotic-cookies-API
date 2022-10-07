@@ -8,7 +8,7 @@ const Cookie = require('../models/cookie')
 const router = express.Router()
 
 // Routes
-// GET all fruits
+// GET all cookies
 // Index Route
 router.get('/', (req, res) => {
     Cookie.find({})
@@ -32,10 +32,10 @@ router.get('/new', (req, res) => {
     res.render('cookies/new', { username, loggedIn, userId })
 })
 
-// GET for owner's fruits
+// GET for owner's cookies
 // another index route, owner-specific, to list all cookies owned by logged in user
 router.get('/mine', (req, res) => {
-    // find fruits by owner and display them
+    // find cookies by owner and display them
     Cookie.find({ owner: req.session.userId })
         .then(cookies => {
             const username = req.session.username
@@ -55,13 +55,12 @@ router.get('/:id', (req, res) => {
             const username = req.session.username
             const loggedIn = req.session.loggedIn
             const userId = req.session.userId
-            // res.json({ fruit: fruit })
             res.render('cookies/show', { cookie, username, loggedIn, userId })
         })
         .catch(err => res.json(err))
 })
 
-// POST for new fruit
+// POST for new cookie
 // Create route
 router.post('/', (req, res) => {
     // bc our checkboxes dont send true or false(which they totally should but whatev)
@@ -71,33 +70,54 @@ router.post('/', (req, res) => {
     req.body.owner = req.session.userId
     Cookie.create(req.body)
         .then(cookie => {
-            res.redirect('/fruits')
+            res.redirect('/cookies')
         })
         .catch(err => res.json(err))
 })
 
+
+// GET update page
+// show the update page
+router.get('/edit/:id', (req, res) => {
+    const username = req.session.username
+    const loggedIn = req.session.loggedIn
+    const userId = req.session.userId
+    const cookieId = req.params.id
+    Cookie.findById(cookieId)
+        .then (cookie => {
+            res.render('cookies/edit', { cookie, username, loggedIn, userId })
+        })
+        .catch (err => {
+            res.json(err)
+        })
+})
+
 // PUT
-// Update Route
+// Update a cookie
 router.put('/:id', (req, res) => {
-    const id = req.params.id
-    Cookie.findById(id)
+    const cookieId = req.params.id
+    req.body.isSweet = req.body.isSweet === 'on' ? true : false
+    req.body.isEatenCold = req.body.isEatenCold === 'on' ? true : false
+    Cookie.findById(cookieId)
         .then(cookie => {
             // if the cookie's owner is the current logged in user
             if (cookie.owner == req.session.userId) {
-                res.sendStatus(204)
                 return cookie.updateOne(req.body)
             // if owner is not the user, unauthorized status
             } else {
                 res.sendStatus(401)
             }
         })
+        .then(() => {
+            res.redirect(`/cookies/${cookieId}`)
+        })
         .catch(err => res.json(err))
 })
 
 
-// DELETE a fruit
+// DELETE a cookie
 router.delete('/:id', (req, res) => {
-    // get the fruit id
+    // get the cookie id
     const cookieId = req.params.id
     // delete and REDIRECT
     Cookie.findByIdAndRemove(cookieId)
