@@ -21,7 +21,11 @@ middleware(app)
 /////// Routes /////////
 // Homepage
 app.get('/', (req, res) => {
-    res.render('index.liquid')
+    if (req.session.loggedIn) {
+        res.redirect('/cookies')
+    } else {
+        res.render('index.liquid')
+    }
 })
 
 // Register our Routes
@@ -31,6 +35,17 @@ app.use('/comments', CommentRouter)
 app.use('/users', UserRouter)
 app.use('/ratings', RatingRouter)
 
+app.get('/error', (req, res) => {
+    // get session variables
+    const { username, loggedIn, userId } = req.session
+    const error = req.query.error || 'This page does not exist.'
+    res.render('error.liquid', { error, username, loggedIn, userId })
+})
+
+// this is a catch-all route that will redirect to the error page for anything that doesn't satisfy a controller
+app.all('*', (req, res) => {
+    res.redirect('/error')
+})
 ////// Server Listener ///////
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Now listening to the sweet sounds of port: ${PORT}`))
