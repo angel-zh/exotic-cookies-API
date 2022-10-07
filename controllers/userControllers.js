@@ -34,7 +34,8 @@ router.post('/signup', async (req, res) => {
         // if successful, console log the user(for now)
         .then(user => {
             console.log(user)
-            res.status(201).json({ username: user.username})
+            // res.status(201).json({ username: user.username})
+            res.redirect('/users/login')
         })
         // if an error occurs, log the error
         .catch(err => {
@@ -69,11 +70,8 @@ router.post('/login', async (req, res) => {
                     req.session.username = username
                     req.session.loggedIn = true
                     req.session.userId = user.id 
-
                     console.log('this is req.session', req.session) 
-                    // we'll send a 201 status and the user as json for now
-                    // we'll change this later for security purposes
-                    res.status(201).json({ user: user.toObject() })
+                    res.redirect('/cookies')
                 } else {
                     res.json({ error: 'username or password incorrect' })
                 }
@@ -106,7 +104,7 @@ router.delete('/logout', (req, res) => {
     req.session.destroy(err => {
         console.log('req.session after logout', req.session)
         console.log('err on logout?', err)
-        res.sendStatus(204)
+        res.redirect('/')
     })
 })
 
