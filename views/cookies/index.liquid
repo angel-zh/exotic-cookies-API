@@ -1,27 +1,42 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 
-<div>
-    <h2 class="'display-6">All Exotic Cookie Flavors</h2>
-    <div class="row">
-        {% for cookie in cookies %}
-        <div class="card">
-            <h5 class="card-header">{{cookie.name}}</h5>
-            <div class="card-body">
-                <h5 class="card-title">
-                    {% if cookie.isSweet %}
-                        Sweet
-                    {% else %}
-                        Salty
-                    {% endif %}
-                </h5>
-                <a class="btn btn-info" href="/cookies/{{cookie.id}}">
-                    View details
-                </a>
+
+    {% if cookies.length > 0 %}
+        <div>
+            <h2 class="'display-6">All Exotic Cookie Flavors</h2>
+            <div class="row">
+                {% for cookie in cookies %}
+                <div class="card" style="width: 18rem">
+                    <h5 class="card-header">{{cookie.name}}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% if cookie.isSweet %}
+                                Sweet
+                            {% else %}
+                                Salty
+                            {% endif %}
+                            and
+                            {% if cookie.isEatenCold %}
+                                Cold
+                            {% else %}
+                                Warm
+                            {% endif %}
+                        </h5>
+                        <a class="btn btn-info" href="/cookies/{{cookie.id}}">
+                            View details
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-    </div>
-</div>
-
+    {% else %}
+        <div>
+            <h2 class="display-6">No cookies yet... time to add some!</h2>
+            <a class="btn btn-info" href="/cookies/new">
+                Add Cookie
+            </a> 
+        </div>
+    {% endif %}
 {% endblock %}
