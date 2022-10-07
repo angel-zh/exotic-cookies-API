@@ -40,7 +40,7 @@ router.post('/signup', async (req, res) => {
         // if an error occurs, log the error
         .catch(err => {
             console.log(err)
-            res.json(err)
+            res.redirect(`/error?error=${err}`)
         })
 })
 
@@ -73,16 +73,15 @@ router.post('/login', async (req, res) => {
                     console.log('this is req.session', req.session) 
                     res.redirect('/cookies')
                 } else {
-                    res.json({ error: 'username or password incorrect' })
+                    res.redirect(`/error?error=username%20or%20password%20incorrect`)
                 }
             } else {
                 // send an error message
-                res.json({ error: 'user does not exist' })
+                res.redirect(`/error?error=user%20does%20not%20exist`)
             }
         })
         .catch(err => {
-            console.log(err)
-            res.json(err)
+            res.redirect(`/error?error=${err}`)
         })
 })
 
