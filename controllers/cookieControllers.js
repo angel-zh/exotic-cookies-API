@@ -13,6 +13,7 @@ const router = express.Router()
 router.get('/', (req, res) => {
     Cookie.find({})
         .populate('comments.author', 'username')
+        .populate('ratings.author', 'username')
         .then(cookies => {
             const username = req.session.username
             const loggedIn = req.session.loggedIn
@@ -53,6 +54,7 @@ router.get('/:id', (req, res) => {
     
     Cookie.findById(cookieId)
         .populate('comments.author', 'username')
+        .populate('ratings.author', 'username')
         .then(cookie => {
             const username = req.session.username
             const loggedIn = req.session.loggedIn
