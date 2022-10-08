@@ -28,9 +28,9 @@ router.post('/:cookieId', (req, res) => {
             return cookie.save()
         })
         .then(cookie => {
-            res.status(200).json({ cookie: cookie })
+            res.redirect(`/cookies/${cookie.id}`)
         })
-        .catch(error => console.log(error))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 // DELETE
@@ -45,22 +45,24 @@ router.delete('/delete/:cookieId/:ratingId', (req, res) => {
             // subdocs have a built in method that you can use to access specific subdocuments when you need to
             // this built in method is called .id()
             const theRating = cookie.ratings.id(ratingId)
-            // console.log('this is the rating that was found', theRating)
+            console.log('this is the rating that was found', theRating)
             // make sure the user is logged in
             if (req.session.loggedIn) {
                 // only let the author of the rating delete it
                 if (theRating.author == req.session.userId) {
-                    theRating.deleteOne()
+                    theRating.remove()
                     cookie.save()
-                    res.sendStatus(204)
+                    res.redirect(`/cookies/${cookie.id}`)
                 } else {
-                    res.sendStatus(401)
+                    const err = 'you%20are%20not%20authorized%20or%20this%20action'
+                    res.redirect(`/error?error=${err}`)
                 }
             } else {
-                res.sendStatus(401)
+                const err = 'you%20are%20not%20authorized%20or%20this%20action'
+                    res.redirect(`/error?error=${err}`)
             }
         })
-        .catch(error => console.log(error))
+        .catch(err => res.redirect(`/error?error=${err}`))
 })
 
 
