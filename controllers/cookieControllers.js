@@ -50,7 +50,9 @@ router.get('/mine', (req, res) => {
 // Show Route
 router.get('/:id', (req, res) => {
     const cookieId = req.params.id
+    
     Cookie.findById(cookieId)
+        .populate('comments.author', 'username')
         .then(cookie => {
             const username = req.session.username
             const loggedIn = req.session.loggedIn
