@@ -51,7 +51,6 @@ router.get('/mine', (req, res) => {
 // Show Route
 router.get('/:id', (req, res) => {
     const cookieId = req.params.id
-    
     Cookie.findById(cookieId)
         .populate('comments.author', 'username')
         .populate('ratings.author', 'username')

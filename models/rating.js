@@ -5,7 +5,7 @@ const mongoose = require('./connection')
 // subdocuments are not models, they are associated with a model
 const { Schema } = mongoose
 
-// comment schema
+// rating schema
 const ratingSchema = new Schema({
     rating: {
         type: Number,

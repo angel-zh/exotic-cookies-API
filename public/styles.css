@@ -1,7 +1,9 @@
 body {
-    background-color: rgb(158, 214, 219);
+    background-color: rgb(101, 168, 174);
+    color: white;
 }
 
 .card {
     margin: 5px;
+    background-color: rgb(64, 69, 88);
 }
