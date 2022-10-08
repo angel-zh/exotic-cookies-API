@@ -1,0 +1,16 @@
+{% block content %}
+    <div class="card mb-4 shadow">
+        <div class="card-body">
+            <p>Rating: {{ rating.rating }}/5</p>
+            <div class="d-flex justify-content-between">
+                <small>Author: {{ rating.author.username }}</small>
+                {% if rating.author == userId %}
+                    <form action="/ratings/delete/{{cookie.id}}/{{rating.id}}?_method=DELETE" method="POST">
+                        <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
