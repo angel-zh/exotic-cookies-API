@@ -45,12 +45,12 @@ router.delete('/delete/:cookieId/:commId', (req, res) => {
             // subdocs have a built in method that you can use to access specific subdocuments when you need to
             // this built in method is called .id()
             const theComment = cookie.comments.id(commId)
-            // console.log('this is the comment that was found', theComment)
+            console.log('this is the comment that was found', theComment)
             // make sure the user is logged in
             if (req.session.loggedIn) {
                 // only let the author of the comment delete it
                 if (theComment.author == req.session.userId) {
-                    theComment.deleteOne()
+                    theComment.remove()
                     cookie.save()
                     res.redirect(`/cookies/${cookie.id}`)
                 } else {
