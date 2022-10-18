@@ -3,7 +3,7 @@ require("dotenv").config()
 const express = require("express") 
 
 const path = require("path") 
-const CookieRouter = require('./controllers/CookieControllers')
+const CookieRouter = require('./controllers/cookieControllers')
 const CommentRouter = require('./controllers/commentControllers')
 const RatingRouter = require('./controllers/ratingControllers')
 const UserRouter = require('./controllers/userControllers')
